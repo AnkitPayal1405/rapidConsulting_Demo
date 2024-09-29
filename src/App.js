@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import Body from './Components/Body';
+import Footer from './Components/Footer';
+import Navabr from './Components/Navabr';
+import Preloader from './Components/Preloader';
+import PopupForm from './Components/PopupForm';
 
 function App() {
+
+  const [isLoaded, setIsLoaded] = useState(false)
+
+    const handleLoad = () => {
+        setIsLoaded(true);
+    };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      
+
+    {!isLoaded && <Preloader onLoad={handleLoad} />}
+            {isLoaded && (
+                <div>
+                <Navabr/>
+                <Body/>
+                <PopupForm/>
+                <Footer/>
+                </div>
+            )}
+
+
+    {/* <div className="App">
+      <Navabr/>
+      <Body/>
+      <Footer/>
+    </div> */}
     </div>
   );
 }
